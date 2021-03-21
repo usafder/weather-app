@@ -40,5 +40,5 @@ export interface Weather {
 
 export interface ReduxAction {
   type: string;
-  payload: any;
+  payload?: any;
 }
