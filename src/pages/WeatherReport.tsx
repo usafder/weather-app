@@ -42,7 +42,7 @@ const WeatherReport = () => {
   };
 
   const renderSearchBar = () => (
-    <div style={{ paddingTop: 20, marginBottom: '50px' }}>
+    <div style={{ paddingTop: 20, marginBottom: '6%' }}>
       <TextInput
         placeholder="Enter city name"
         value={searchText}
@@ -83,6 +83,7 @@ const WeatherReport = () => {
         borderTopColor: 'white',
         borderTop: '1px solid',
         paddingRight: 20,
+        fontFamily: 'fjalla one, sans-serif',
       }}
     >
       {`${roundOffValue(weatherData.main.temp)}\u00B0`}
@@ -90,7 +91,13 @@ const WeatherReport = () => {
   );
 
   const renderDataWithIcon = (data: number, unit: string, iconName: string) => (
-    <h1 style={{ padding: 4, margin: 0 }}>
+    <h1
+      style={{
+        padding: 4,
+        margin: 0,
+        fontFamily: 'fjalla one, sans-serif',
+      }}
+    >
       <span
         style={{
           padding: 8,
@@ -118,7 +125,16 @@ const WeatherReport = () => {
       {weatherData && (
         <div style={{ color: 'white' }}>
           {/* City Name */}
-          <h2>{weatherData.name.toUpperCase()}</h2>
+          <h1
+            style={{
+              margin: 0,
+              marginBottom: 10,
+              fontFamily: 'share tech mono, monospace',
+              fontSize: '2em',
+            }}
+          >
+            {weatherData.name.toUpperCase()}
+          </h1>
 
           <WeatherAnimation
             color="white"
