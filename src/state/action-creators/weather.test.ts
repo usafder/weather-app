@@ -2,12 +2,12 @@ import {
   GET_WEATHER_DATA,
   GET_WEATHER_DATA_FAILURE,
   GET_WEATHER_DATA_SUCCESS,
-} from '../../action-types/weather';
+} from '../action-types/weather';
 import {
   getWeatherData,
   getWeatherDataFailure,
   getWeatherDataSuccess,
-} from '../weather';
+} from './weather';
 
 test('getWeatherData', () => {
   expect(getWeatherData('Tokyo')).toEqual({
