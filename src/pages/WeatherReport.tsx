@@ -110,7 +110,7 @@ const WeatherReport = () => {
           <WeatherAnimation
             color="white"
             type={WeatherAnimationType[weather.weather[0].main]}
-            size={240}
+            size={220}
           />
 
           <div
