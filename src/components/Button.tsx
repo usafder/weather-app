@@ -1,29 +1,30 @@
+import styled from '@emotion/styled';
+
 interface ButtonProps {
   text: string;
   onClick: (event: any) => void;
   style?: React.CSSProperties;
+  className?: string;
 }
 
-// TODO: use emotion lib
+const Button = (props: ButtonProps) => (
+  <button
+    className={props.className}
+    style={{ ...props.style }}
+    onClick={props.onClick}
+  >
+    {props.text}
+  </button>
+);
 
-const Button = (props: ButtonProps) => {
-  return (
-    <button
-      style={{
-        paddingTop: 8,
-        paddingBottom: 8,
-        border: '1px solid',
-        borderColor: 'gray',
-        borderRadius: 4,
-        boxShadow: '0 2px 4px 0px gray',
-        cursor: 'pointer',
-        ...props.style,
-      }}
-      onClick={props.onClick}
-    >
-      {props.text}
-    </button>
-  );
-};
+const StyledButton = styled(Button)`
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid;
+  border-color: gray;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0px gray;
+  cursor: pointer;
+`;
 
-export default Button;
+export default StyledButton;
