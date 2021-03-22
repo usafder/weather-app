@@ -8,12 +8,16 @@ import {
   mapWindIcon,
   roundOffValue,
 } from '../shared/utils';
-import { Button, Icon, TextInput } from '../components';
+import {
+  Button,
+  Icon,
+  TextInput,
+  Loader,
+  WeatherAnimation,
+} from '../components';
 import { getWeatherData } from '../state/action-creators/weather';
 import './WeatherReport.css';
-import WeatherAnimation, {
-  WeatherAnimationType,
-} from '../components/WeatherAnimation';
+import { WeatherAnimationType } from '../components/WeatherAnimation';
 
 const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
@@ -54,8 +58,17 @@ const WeatherReport = () => {
     </div>
   );
 
-  // TODO: display animated loader
-  const renderLoadingMessage = () => <h2>Loading Weather Report...</h2>;
+  const renderLoader = () => (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Loader />
+    </div>
+  );
 
   // TODO: customize error message based on the type of error
   const renderErrorMessage = () => (
@@ -99,7 +112,7 @@ const WeatherReport = () => {
       }`}
     >
       {renderSearchBar()}
-      {isLoading && renderLoadingMessage()}
+      {isLoading && renderLoader()}
       {error && renderErrorMessage()}
 
       {weather && (
