@@ -1,5 +1,6 @@
 .weather-report-container {
   height: 100%;
+  overflow-y: scroll;
 }
 
 .hot {
