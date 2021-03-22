@@ -3,51 +3,6 @@ export function convertMPSToKMH(valueToConvert: number) {
   return valueToConvert * 3.6;
 }
 
-/** Maps the className of weather icon based on the weather condition. */
-export function mapWeatherIcon(weatherCondition: string) {
-  let iconClassName = 'wi';
-
-  switch (weatherCondition) {
-    case 'Thunderstorm':
-      iconClassName += ' wi-owm-200';
-      break;
-    case 'Rain':
-      iconClassName += ' wi-owm-302';
-      break;
-    case 'Drizzle':
-      iconClassName += ' wi-owm-300';
-      break;
-    case 'Snow':
-      iconClassName += ' wi-owm-600';
-      break;
-    case 'Smoke':
-      iconClassName += ' wi-owm-711';
-      break;
-    case 'Haze':
-      iconClassName += ' wi-owm-721';
-      break;
-    case 'Dust':
-      iconClassName += ' wi-owm-731';
-      break;
-    case 'Fog':
-      iconClassName += ' wi-owm-741';
-      break;
-    case 'Tornado':
-      iconClassName += ' wi-owm-781';
-      break;
-    case 'Clear':
-      iconClassName += ' wi-owm-800';
-      break;
-    case 'Clouds':
-      iconClassName += ' wi-owm-804';
-      break;
-    default:
-    // do nothing
-  }
-
-  return iconClassName;
-}
-
 /** Maps the className based on the temperature. */
 export function mapWeatherBgColor(temperature: number) {
   let className = '';

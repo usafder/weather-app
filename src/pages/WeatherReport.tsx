@@ -5,13 +5,15 @@ import { useHistory, useLocation } from 'react-router-dom';
 import {
   convertMPSToKMH,
   mapWeatherBgColor,
-  mapWeatherIcon,
   mapWindIcon,
   roundOffValue,
 } from '../shared/utils';
 import { Button, Icon, TextInput } from '../components';
 import { getWeatherData } from '../state/action-creators/weather';
 import './WeatherReport.css';
+import WeatherAnimation, {
+  WeatherAnimationType,
+} from '../components/WeatherAnimation';
 
 const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
@@ -22,6 +24,11 @@ const WeatherReport = () => {
   const error = useSelector((state) => (state as any).weather.error);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    dispatch(getWeatherData(params.city as string));
+  }, [location, dispatch]);
+
   const onTextInputChange = (e: any) => {
     setSearchText(e.target.value);
   };
@@ -29,11 +36,6 @@ const WeatherReport = () => {
   const onButtonClick = () => {
     history.push(`?city=${searchText}`);
   };
-
-  useEffect(() => {
-    const params = queryString.parse(location.search);
-    dispatch(getWeatherData(params.city as string));
-  }, [location, dispatch]);
 
   const renderSearchBar = () => (
     <div style={{ paddingTop: 20, marginBottom: '50px' }}>
@@ -52,8 +54,10 @@ const WeatherReport = () => {
     </div>
   );
 
+  // TODO: display animated loader
   const renderLoadingMessage = () => <h2>Loading Weather Report...</h2>;
 
+  // TODO: customize error message based on the type of error
   const renderErrorMessage = () => (
     <h2>An Error Occurred. Please try again.</h2>
   );
@@ -103,8 +107,11 @@ const WeatherReport = () => {
           {/* City Name */}
           <h2>{weather.name.toUpperCase()}</h2>
 
-          {/* Weather Icon */}
-          <Icon name={mapWeatherIcon(weather.weather[0].main)} size={180} />
+          <WeatherAnimation
+            color="white"
+            type={WeatherAnimationType[weather.weather[0].main]}
+            size={240}
+          />
 
           <div
             style={{
