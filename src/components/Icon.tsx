@@ -6,9 +6,14 @@ interface IconProps {
   style?: React.CSSProperties;
 }
 
-const Icon = (props: IconProps) => (
-  <i className={props.name} style={{ fontSize: props.size, ...props.style }} />
-);
+const Icon = (props: IconProps) => {
+  const { name, size, style } = props;
+  return <i className={name} style={{ fontSize: size, ...style }} />;
+};
+
+Icon.defaultProps = {
+  style: undefined,
+};
 
 const StyledIcon = styled(Icon)``;
 

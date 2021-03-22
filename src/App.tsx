@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import Router from './router';
 import 'weathericons/css/weather-icons.min.css';
-import styled from '@emotion/styled';
 
 const AppContainer = styled.div`
   text-align: center;

@@ -1,25 +1,35 @@
 import styled from '@emotion/styled';
 
 interface TextInputProps {
-  type: string;
   placeholder: string;
   value: string;
-  disabled: boolean;
-  onChange: (event: any) => void;
+  disabled?: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
   style?: React.CSSProperties;
   className?: string;
 }
 
 const TextInput = (props: TextInputProps) => {
+  const {
+    className,
+    style,
+    type,
+    placeholder,
+    value,
+    disabled,
+    onChange,
+  } = props;
+
   return (
     <input
-      className={props.className}
-      style={{ paddingTop: 8, paddingBottom: 8, ...props.style }}
-      type={props.type}
-      placeholder={props.placeholder}
-      value={props.value}
-      disabled={props.disabled}
-      onChange={props.onChange}
+      className={className}
+      style={{ paddingTop: 8, paddingBottom: 8, ...style }}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      disabled={disabled}
+      onChange={onChange}
     />
   );
 };
@@ -27,6 +37,8 @@ const TextInput = (props: TextInputProps) => {
 TextInput.defaultProps = {
   type: 'text',
   disabled: false,
+  className: '',
+  style: undefined,
 };
 
 const StyledTextInput = styled(TextInput)`

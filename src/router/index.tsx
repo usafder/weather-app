@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NotFound from '../pages/NotFound';
 import WeatherReport from '../pages/WeatherReport';
 
@@ -10,7 +10,5 @@ const Router = () => (
     </Switch>
   </BrowserRouter>
 );
-
-export { Link };
 
 export default Router;

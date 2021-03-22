@@ -27,7 +27,7 @@ const WeatherReport = () => {
   };
 
   const onButtonClick = () => {
-    history.push('?city=' + searchText);
+    history.push(`?city=${searchText}`);
   };
 
   useEffect(() => {

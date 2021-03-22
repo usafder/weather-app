@@ -67,15 +67,17 @@ export function mapWeatherBgColor(temperature: number) {
 
 /** Maps the className of wind icon based on the wind speed. */
 export function mapWindIcon(windSpeed: number) {
+  let className = 'wi wi-small-craft-advisory';
+
   if (windSpeed >= 30 && windSpeed <= 88) {
-    return 'wi wi-gale-warning';
+    className = 'wi wi-gale-warning';
   } else if (windSpeed >= 89 && windSpeed <= 102) {
-    return 'wi wi-storm-warning';
+    className = 'wi wi-storm-warning';
   } else if (windSpeed > 102) {
-    return 'wi wi-hurricane-warning';
-  } else {
-    return 'wi wi-small-craft-advisory';
+    className = 'wi wi-hurricane-warning';
   }
+
+  return className;
 }
 
 /** Returns the rounded off value. */
