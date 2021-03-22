@@ -11,7 +11,7 @@ interface WeatherState {
   error: boolean;
 }
 
-const INITIAL_STATE: WeatherState = {
+export const INITIAL_STATE: WeatherState = {
   data: null,
   isLoading: true,
   error: false,
