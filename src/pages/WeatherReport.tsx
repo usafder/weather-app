@@ -23,7 +23,7 @@ const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
   const location = useLocation();
   const history = useHistory();
-  const weather = useSelector((state) => (state as any).weather.data);
+  const weatherData = useSelector((state) => (state as any).weather.data);
   const isLoading = useSelector((state) => (state as any).weather.isLoading);
   const error = useSelector((state) => (state as any).weather.error);
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const WeatherReport = () => {
         paddingRight: 20,
       }}
     >
-      {`${roundOffValue(weather.main.temp)}\u00B0`}
+      {`${roundOffValue(weatherData.main.temp)}\u00B0`}
     </h1>
   );
 
@@ -108,21 +108,21 @@ const WeatherReport = () => {
   return (
     <div
       className={`weather-report-container ${
-        weather && mapWeatherBgColor(weather.main.temp)
+        weatherData && mapWeatherBgColor(weatherData.main.temp)
       }`}
     >
       {renderSearchBar()}
       {isLoading && renderLoader()}
       {error && renderErrorMessage()}
 
-      {weather && (
+      {weatherData && (
         <div style={{ color: 'white' }}>
           {/* City Name */}
-          <h2>{weather.name.toUpperCase()}</h2>
+          <h2>{weatherData.name.toUpperCase()}</h2>
 
           <WeatherAnimation
             color="white"
-            type={WeatherAnimationType[weather.weather[0].main]}
+            type={WeatherAnimationType[weatherData.weather[0].main]}
             size={220}
           />
 
@@ -138,16 +138,18 @@ const WeatherReport = () => {
             <div style={{ borderTopColor: 'white', borderTop: '1px solid' }}>
               {/* Humidity */}
               {renderDataWithIcon(
-                roundOffValue(weather.main.humidity),
+                roundOffValue(weatherData.main.humidity),
                 '%',
                 'wi wi-raindrop'
               )}
 
               {/* Wind Speed */}
               {renderDataWithIcon(
-                roundOffValue(convertMPSToKMH(weather.wind.speed)),
+                roundOffValue(convertMPSToKMH(weatherData.wind.speed)),
                 'Km/h',
-                mapWindIcon(roundOffValue(convertMPSToKMH(weather.wind.speed)))
+                mapWindIcon(
+                  roundOffValue(convertMPSToKMH(weatherData.wind.speed))
+                )
               )}
             </div>
           </div>
