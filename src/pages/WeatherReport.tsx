@@ -31,7 +31,6 @@ const WeatherReport = () => {
   };
 
   useEffect(() => {
-    // TODO: caching
     const params = queryString.parse(location.search);
     dispatch(getWeatherData(params.city as string));
   }, [location, dispatch]);

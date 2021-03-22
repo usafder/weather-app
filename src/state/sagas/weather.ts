@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { APIResponse } from '../../api/api-client';
 import {
   getWeatherDataFailure,
   getWeatherDataSuccess,
@@ -10,31 +10,65 @@ import {
   getWeatherDataUsingLatAndLong,
 } from '../../api/weather';
 import { ReduxAction, Weather } from '../../shared/interfaces';
+import cacheManager from '../../shared/cache-manager';
 
+/** Gets the user's current location coordinates (latitude & longitude). */
 export const getLocationCoordinates = () => {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
-      (location) => resolve(location),
+      (location) => resolve(location.coords),
       (error) => reject(error)
     );
   });
 };
 
-export function* handleGettingWeatherData(action: ReduxAction) {
-  let response: AxiosResponse<Weather>;
-  if (action.payload) {
-    const city = action.payload;
-    response = yield call(getWeatherDataUsingCityName, city);
-  } else {
-    const { coords } = yield call(getLocationCoordinates);
-    const { latitude, longitude } = coords;
-    response = yield call(getWeatherDataUsingLatAndLong, latitude, longitude);
-  }
-
+/** Updates the data or displays an error based on the API response. */
+export function* handleWeatherAPIResponse(response: APIResponse<Weather>) {
   if (response && response.status >= 200 && response.status < 300) {
     yield put(getWeatherDataSuccess(response.data));
+    // TODO: save only the required properties instead of saving all of the properties
+    yield call(
+      cacheManager.saveData,
+      response.data.name,
+      JSON.stringify(response.data)
+    );
+    yield call(cacheManager.removeData, response.data.name);
   } else {
     yield put(getWeatherDataFailure());
+  }
+}
+
+/** Contains logic to get the current location's weather data from the API. */
+export function* getCurrentLocationWeatherData() {
+  try {
+    const { latitude, longitude } = yield call(getLocationCoordinates);
+    const response: APIResponse<Weather> = yield call(
+      getWeatherDataUsingLatAndLong,
+      latitude,
+      longitude
+    );
+    yield call(handleWeatherAPIResponse, response);
+  } catch (e) {
+    yield put(getWeatherDataFailure());
+  }
+}
+
+/** Contains logic to get the weather data from the API or the cache. */
+export function* handleGettingWeatherData(action: ReduxAction) {
+  if (action.payload) {
+    const { cachedData } = yield call(cacheManager.loadData, action.payload);
+    if (cachedData) {
+      yield put(getWeatherDataSuccess(JSON.parse(cachedData)));
+    } else {
+      const city = action.payload;
+      const response: APIResponse<Weather> = yield call(
+        getWeatherDataUsingCityName,
+        city
+      );
+      yield call(handleWeatherAPIResponse, response);
+    }
+  } else {
+    yield call(getCurrentLocationWeatherData);
   }
 }
 

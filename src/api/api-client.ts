@@ -1,4 +1,8 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+
+export interface APIResponse<T> extends AxiosResponse<T> {
+  success: boolean;
+}
 
 export const apiKey = process.env.REACT_APP_API_KEY;
 
