@@ -47,6 +47,7 @@ const WeatherReport = () => {
       <Button
         text="Get Weather Report"
         style={{ marginLeft: 10, marginTop: 4 }}
+        disabled={!searchText}
         onClick={onButtonClick}
       />
     </div>
