@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A small web app to display the weather conditions of a city.
+
+Demo available [here](https://best-weather.netlify.app/)
+
+## Features
+- Displays the city name, current weather icon, temperature, humidity and wind speed
+- Loads a specific city using the query string ‘?city=Tokyo’
+- Detects the current city using geolocation and displays its weather if no city is mentioned
+- The background colour changes based on the temperature
+- Caches the API data and refreshes it after 5m
+- Responsive design. Works well in all devices (desktop/tablet/mobile)
+
+## Tech Stack
+- Cross-browser compatible back to Internet Explorer 11
+- Uses the latest versions of TypeScript, ESLint, prettier, babel, webpack, Emotion, React (with Hooks, FC), Redux and Redux Saga
+- Uses data from OpenWeatherMap API and axios for API requests
+- Uses icons from [weather-icons](http://erikflowers.github.io/weather-icons/)
+- Uses Google Fonts
+- Deployed on Netlify
+
 
 ## Available Scripts
 
@@ -13,6 +32,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
 
 ### `npm test`
 
@@ -39,8 +59,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run lint`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Displays lint errors in console.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
