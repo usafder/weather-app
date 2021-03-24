@@ -11,16 +11,16 @@ import {
 } from '../../api/weather';
 import { ReduxAction, Weather } from '../../shared/interfaces';
 import cacheManager from '../../shared/cache-manager';
+import locationNavigator from '../../shared/location-navigator';
 
 /** Gets the user's current location coordinates (latitude & longitude). */
-export const getLocationCoordinates = () => {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      (location) => resolve(location.coords),
-      (error) => reject(error)
-    );
-  });
-};
+export function* getLocationCoordinates() {
+  const { latitude, longitude } = yield call(
+    locationNavigator.getCurrentLocation
+  );
+
+  return { latitude, longitude };
+}
 
 /** Updates the data or displays an error based on the API response. */
 export function* handleWeatherAPIResponse(response: APIResponse<Weather>) {
