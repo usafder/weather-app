@@ -1,7 +1,13 @@
-interface CacheResponse {
+export interface CacheResponse {
   success: boolean;
   error?: any;
   cachedData?: string | null;
+}
+
+export interface CacheManager {
+  saveData: (key: string, value: string) => CacheResponse;
+  loadData: (key: string) => CacheResponse;
+  removeData: (key: string, delay?: number) => CacheResponse;
 }
 
 /** Used for storing data in the cache. */
@@ -25,7 +31,7 @@ function loadData(key: string): CacheResponse {
 }
 
 /** Used for removing data from cache. By default delays removing data by 5 minutes. */
-function removeData(key: string, delay = 300000) {
+function removeData(key: string, delay = 300000): CacheResponse {
   try {
     setTimeout(() => {
       localStorage.removeItem(key.toLowerCase());
@@ -36,6 +42,6 @@ function removeData(key: string, delay = 300000) {
   }
 }
 
-const cacheManager = { saveData, loadData, removeData };
+const cacheManager: CacheManager = { saveData, loadData, removeData };
 
 export default cacheManager;
