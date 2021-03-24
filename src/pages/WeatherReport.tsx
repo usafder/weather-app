@@ -19,6 +19,14 @@ import {
 import { getWeatherData } from '../state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
 
+const SearchBarContainer = styled.div`
+  padding-top: 20px;
+  margin-bottom: 5%;
+  @media only screen and (min-width: 600px) {
+    margin-bottom: 2%;
+  }
+`;
+
 const WeatherReportContainer = styled.div`
   height: 100%;
   overflow-y: scroll;
@@ -115,7 +123,7 @@ const WeatherReport = () => {
   };
 
   const renderSearchBar = () => (
-    <div style={{ paddingTop: 20, marginBottom: '6%' }}>
+    <SearchBarContainer>
       <TextInput
         placeholder="Enter city name"
         value={searchText}
@@ -128,7 +136,7 @@ const WeatherReport = () => {
         disabled={!searchText}
         onClick={onButtonClick}
       />
-    </div>
+    </SearchBarContainer>
   );
 
   const renderLoader = () => (
