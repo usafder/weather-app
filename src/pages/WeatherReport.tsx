@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useHistory, useLocation } from 'react-router-dom';
+import styled from '@emotion/styled';
 import {
   convertMPSToKMH,
   mapWeatherBgColor,
@@ -16,8 +17,80 @@ import {
   WeatherAnimation,
 } from '../components';
 import { getWeatherData } from '../state/action-creators/weather';
-import './WeatherReport.css';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
+
+const WeatherReportContainer = styled.div`
+  height: 100%;
+  overflow-y: scroll;
+
+  &.hot {
+    background: #f12711; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom,
+      #f5af19,
+      #f12711
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom,
+      #f5af19,
+      #f12711
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+  &.warm {
+    background: #ffb347; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom,
+      #ffcc33,
+      #ffb347
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom,
+      #ffcc33,
+      #ffb347
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+  &.moderate {
+    background: #a8ff78; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom,
+      #78ffd6,
+      #a8ff78
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom,
+      #78ffd6,
+      #a8ff78
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    background: #11998e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom,
+      #38ef7d,
+      #11998e
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom,
+      #38ef7d,
+      #11998e
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+  &.cold {
+    background: #373b44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to bottom,
+      #4286f4,
+      #373b44
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to bottom,
+      #4286f4,
+      #373b44
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+`;
 
 const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
@@ -113,10 +186,8 @@ const WeatherReport = () => {
   );
 
   return (
-    <div
-      className={`weather-report-container ${
-        weatherData && mapWeatherBgColor(weatherData.main.temp)
-      }`}
+    <WeatherReportContainer
+      className={weatherData && mapWeatherBgColor(weatherData.main.temp)}
     >
       {renderSearchBar()}
       {isLoading && renderLoader()}
@@ -171,7 +242,7 @@ const WeatherReport = () => {
           </div>
         </div>
       )}
-    </div>
+    </WeatherReportContainer>
   );
 };
 
