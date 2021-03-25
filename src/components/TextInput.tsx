@@ -1,4 +1,5 @@
-import styled from '@emotion/styled';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
 interface TextInputProps {
   placeholder: string;
@@ -6,14 +7,14 @@ interface TextInputProps {
   disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
-  style?: React.CSSProperties;
+  css?: any;
   className?: string;
 }
 
 const TextInput = (props: TextInputProps) => {
   const {
     className,
-    style,
+    css: cssStyle,
     type,
     placeholder,
     value,
@@ -24,7 +25,11 @@ const TextInput = (props: TextInputProps) => {
   return (
     <input
       className={className}
-      style={{ paddingTop: 8, paddingBottom: 8, ...style }}
+      css={css`
+        padding-top: 8px;
+        padding-bottom: 8px;
+        ${cssStyle}
+      `}
       type={type}
       placeholder={placeholder}
       value={value}
@@ -38,12 +43,7 @@ TextInput.defaultProps = {
   type: 'text',
   disabled: false,
   className: '',
-  style: undefined,
+  css: undefined,
 };
 
-const StyledTextInput = styled(TextInput)`
-  padding-top: 8px;
-  padding-bottom: 8px;
-`;
-
-export default StyledTextInput;
+export default TextInput;

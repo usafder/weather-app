@@ -1,20 +1,27 @@
-import styled from '@emotion/styled';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
 interface IconProps {
   name: string;
   size: number;
-  style?: React.CSSProperties;
+  css?: any;
 }
 
 const Icon = (props: IconProps) => {
-  const { name, size, style } = props;
-  return <i className={name} style={{ fontSize: size, ...style }} />;
+  const { name, css: cssStyle, size } = props;
+  return (
+    <i
+      className={name}
+      css={css`
+        font-size: ${size};
+        ${cssStyle}
+      `}
+    />
+  );
 };
 
 Icon.defaultProps = {
-  style: undefined,
+  css: undefined,
 };
 
-const StyledIcon = styled(Icon)``;
-
-export default StyledIcon;
+export default Icon;

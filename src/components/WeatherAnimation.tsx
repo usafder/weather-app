@@ -1,4 +1,5 @@
-import styled from '@emotion/styled';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import Skycons, { SkyconsType } from 'react-skycons';
 
 interface WeatherAnimationProps {
@@ -7,10 +8,11 @@ interface WeatherAnimationProps {
   size: number;
   resizeClear?: boolean;
   className?: string;
+  css?: any;
 }
 
 const WeatherAnimation = (props: WeatherAnimationProps) => {
-  const { color, type, size, resizeClear, className } = props;
+  const { color, type, size, css: cssStyle, resizeClear, className } = props;
 
   return (
     <Skycons
@@ -19,6 +21,9 @@ const WeatherAnimation = (props: WeatherAnimationProps) => {
       type={type}
       size={size}
       resizeClear={resizeClear}
+      css={css`
+        ${cssStyle}
+      `}
     />
   );
 };
@@ -26,6 +31,7 @@ const WeatherAnimation = (props: WeatherAnimationProps) => {
 WeatherAnimation.defaultProps = {
   className: '',
   resizeClear: true,
+  css: undefined,
 };
 
 export enum WeatherAnimationType {
@@ -42,5 +48,4 @@ export enum WeatherAnimationType {
   Fog = SkyconsType.FOG,
 }
 
-const StyledWeatherAnimation = styled(WeatherAnimation)``;
-export default StyledWeatherAnimation;
+export default WeatherAnimation;
