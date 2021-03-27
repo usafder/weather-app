@@ -5,7 +5,10 @@ export const getWeatherDataUsingCityName = async (city: string) => {
   try {
     const queryParams = `?q=${city}&appId=${apiKey}&units=metric`;
     const response = await apiClient.get(queryParams);
-    return { ...response, success: response && response.status === 200 };
+    return {
+      ...response,
+      success: response && response.status >= 200 && response.status < 300,
+    };
   } catch (error) {
     return error;
   }
@@ -19,7 +22,10 @@ export const getWeatherDataUsingLatAndLong = async (
   try {
     const queryParams = `?lat=${latitude}&lon=${longitude}&appId=${apiKey}&units=metric`;
     const response = await apiClient.get(queryParams);
-    return { ...response, success: response && response.status === 200 };
+    return {
+      ...response,
+      success: response && response.status >= 200 && response.status < 300,
+    };
   } catch (error) {
     return error;
   }

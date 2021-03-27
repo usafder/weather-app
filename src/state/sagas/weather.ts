@@ -24,7 +24,7 @@ export function* getLocationCoordinates() {
 
 /** Updates the data or displays an error based on the API response. */
 export function* handleWeatherAPIResponse(response: APIResponse<Weather>) {
-  if (response && response.status >= 200 && response.status < 300) {
+  if (response?.success) {
     yield put(getWeatherDataSuccess(response.data));
     // TODO: save only the required properties instead of saving all of the properties
     yield call(
