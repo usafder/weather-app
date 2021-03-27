@@ -12,15 +12,7 @@ interface TextInputProps {
 }
 
 const TextInput = (props: TextInputProps) => {
-  const {
-    className,
-    css: cssStyle,
-    type,
-    placeholder,
-    value,
-    disabled,
-    onChange,
-  } = props;
+  const { className, css: cssStyle, type, placeholder, value, disabled, onChange } = props;
 
   return (
     <input

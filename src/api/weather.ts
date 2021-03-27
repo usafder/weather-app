@@ -15,10 +15,7 @@ export const getWeatherDataUsingCityName = async (city: string) => {
 };
 
 /** Will fetch the weather data based on the latitude and longitude. */
-export const getWeatherDataUsingLatAndLong = async (
-  latitude: number,
-  longitude: number
-) => {
+export const getWeatherDataUsingLatAndLong = async (latitude: number, longitude: number) => {
   try {
     const queryParams = `?lat=${latitude}&lon=${longitude}&appId=${apiKey}&units=metric`;
     const response = await apiClient.get(queryParams);

@@ -17,10 +17,7 @@ export const INITIAL_STATE: WeatherState = {
   error: false,
 };
 
-const weatherReducer = (
-  state: WeatherState = INITIAL_STATE,
-  action: ReduxAction
-) => {
+const weatherReducer = (state: WeatherState = INITIAL_STATE, action: ReduxAction) => {
   switch (action.type) {
     case GET_WEATHER_DATA:
       return { ...INITIAL_STATE };

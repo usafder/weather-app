@@ -1,24 +1,15 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { APIResponse } from '../../api/api-client';
-import {
-  getWeatherDataFailure,
-  getWeatherDataSuccess,
-} from '../action-creators/weather';
+import { getWeatherDataFailure, getWeatherDataSuccess } from '../action-creators/weather';
 import { GET_WEATHER_DATA } from '../action-types/weather';
-import {
-  getWeatherDataUsingCityName,
-  getWeatherDataUsingLatAndLong,
-} from '../../api/weather';
+import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '../../api/weather';
 import { ReduxAction, Weather } from '../../shared/interfaces';
 import cacheManager from '../../shared/cache-manager';
 import locationNavigator from '../../shared/location-navigator';
 
 /** Gets the user's current location coordinates (latitude & longitude). */
 export function* getLocationCoordinates() {
-  const { latitude, longitude } = yield call(
-    locationNavigator.getCurrentLocation
-  );
-
+  const { latitude, longitude } = yield call(locationNavigator.getCurrentLocation);
   return { latitude, longitude };
 }
 
@@ -27,11 +18,7 @@ export function* handleWeatherAPIResponse(response: APIResponse<Weather>) {
   if (response?.success) {
     yield put(getWeatherDataSuccess(response.data));
     // TODO: save only the required properties instead of saving all of the properties
-    yield call(
-      cacheManager.saveData,
-      response.data.name,
-      JSON.stringify(response.data)
-    );
+    yield call(cacheManager.saveData, response.data.name, JSON.stringify(response.data));
     yield call(cacheManager.removeData, response.data.name);
   } else {
     yield put(getWeatherDataFailure());
@@ -61,10 +48,7 @@ export function* handleGettingWeatherData(action: ReduxAction) {
       yield put(getWeatherDataSuccess(JSON.parse(cachedData)));
     } else {
       const city = action.payload;
-      const response: APIResponse<Weather> = yield call(
-        getWeatherDataUsingCityName,
-        city
-      );
+      const response: APIResponse<Weather> = yield call(getWeatherDataUsingCityName, city);
       yield call(handleWeatherAPIResponse, response);
     }
   } else {

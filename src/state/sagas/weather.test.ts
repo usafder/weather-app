@@ -1,14 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import {
-  getWeatherDataUsingCityName,
-  getWeatherDataUsingLatAndLong,
-} from '../../api/weather';
+import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '../../api/weather';
 import cacheManager from '../../shared/cache-manager';
 import { ReduxAction } from '../../shared/interfaces';
-import {
-  getWeatherDataFailure,
-  getWeatherDataSuccess,
-} from '../action-creators/weather';
+import { getWeatherDataFailure, getWeatherDataSuccess } from '../action-creators/weather';
 import { GET_WEATHER_DATA } from '../action-types/weather';
 import weatherWatcherSaga, {
   getLocationCoordinates,
@@ -33,19 +27,11 @@ describe('weather - saga', () => {
       status: 200,
     };
     const iterator = handleWeatherAPIResponse(response as any);
+    expect(iterator.next().value).toEqual(put(getWeatherDataSuccess(response.data as any)));
     expect(iterator.next().value).toEqual(
-      put(getWeatherDataSuccess(response.data as any))
+      call(cacheManager.saveData, response.data.name, JSON.stringify(response.data))
     );
-    expect(iterator.next().value).toEqual(
-      call(
-        cacheManager.saveData,
-        response.data.name,
-        JSON.stringify(response.data)
-      )
-    );
-    expect(iterator.next().value).toEqual(
-      call(cacheManager.removeData, response.data.name)
-    );
+    expect(iterator.next().value).toEqual(call(cacheManager.removeData, response.data.name));
     expect(iterator.next().done).toEqual(true);
   });
 
@@ -67,18 +53,14 @@ describe('weather - saga', () => {
         longitude: 12345,
       } as any).value
     ).toEqual(call(getWeatherDataUsingLatAndLong, 12345, 12345));
-    expect(iterator.next({} as any).value).toEqual(
-      call(handleWeatherAPIResponse, {} as any)
-    );
+    expect(iterator.next({} as any).value).toEqual(call(handleWeatherAPIResponse, {} as any));
     expect(iterator.next().done).toEqual(true);
   });
 
   test('getCurrentLocationWeatherData - failure scenario', () => {
     const iterator = getCurrentLocationWeatherData();
     iterator.next();
-    expect(iterator.throw(new Error('testing error')).value).toEqual(
-      put(getWeatherDataFailure())
-    );
+    expect(iterator.throw(new Error('testing error')).value).toEqual(put(getWeatherDataFailure()));
   });
 
   test('handleGettingWeatherData - success scenario (cache)', () => {
@@ -103,9 +85,7 @@ describe('weather - saga', () => {
     expect(iterator.next({ cachedData: null } as any).value).toEqual(
       call(getWeatherDataUsingCityName, action.payload)
     );
-    expect(iterator.next({} as any).value).toEqual(
-      call(handleWeatherAPIResponse, {} as any)
-    );
+    expect(iterator.next({} as any).value).toEqual(call(handleWeatherAPIResponse, {} as any));
   });
 
   test('handleGettingWeatherData - failure scenario', () => {
@@ -119,8 +99,6 @@ describe('weather - saga', () => {
 
   test('weatherWatcherSaga', () => {
     const iterator = weatherWatcherSaga();
-    expect(iterator.next().value).toEqual(
-      takeLatest(GET_WEATHER_DATA, handleGettingWeatherData)
-    );
+    expect(iterator.next().value).toEqual(takeLatest(GET_WEATHER_DATA, handleGettingWeatherData));
   });
 });

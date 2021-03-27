@@ -33,9 +33,7 @@ describe('weather - reducer', () => {
   });
 
   test('GET_WEATHER_DATA_FAILURE', () => {
-    expect(
-      weatherReducer(INITIAL_STATE, { type: GET_WEATHER_DATA_FAILURE })
-    ).toEqual({
+    expect(weatherReducer(INITIAL_STATE, { type: GET_WEATHER_DATA_FAILURE })).toEqual({
       data: null,
       error: true,
       isLoading: false,

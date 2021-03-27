@@ -4,19 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
-import {
-  convertMPSToKMH,
-  mapWeatherBgColor,
-  mapWindIcon,
-  roundOffValue,
-} from '../shared/utils';
-import {
-  Button,
-  Icon,
-  TextInput,
-  Loader,
-  WeatherAnimation,
-} from '../components';
+import { convertMPSToKMH, mapWeatherBgColor, mapWindIcon, roundOffValue } from '../shared/utils';
+import { Button, Icon, TextInput, Loader, WeatherAnimation } from '../components';
 import { getWeatherData } from '../state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
 
@@ -52,11 +41,7 @@ const WeatherReport = () => {
         }
       `}
     >
-      <TextInput
-        placeholder="Enter city name"
-        value={searchText}
-        onChange={onTextInputChange}
-      />
+      <TextInput placeholder="Enter city name" value={searchText} onChange={onTextInputChange} />
 
       <Button
         text="Get Weather Report"
@@ -83,9 +68,7 @@ const WeatherReport = () => {
   );
 
   // TODO: customize error message based on the type of error
-  const renderErrorMessage = () => (
-    <h2>An Error Occurred. Please try again.</h2>
-  );
+  const renderErrorMessage = () => <h2>An Error Occurred. Please try again.</h2>;
 
   const renderTemperatureSection = () => (
     <h1
@@ -220,19 +203,13 @@ const WeatherReport = () => {
               `}
             >
               {/* Humidity */}
-              {renderDataWithIcon(
-                roundOffValue(weatherData.main.humidity),
-                '%',
-                'wi wi-raindrop'
-              )}
+              {renderDataWithIcon(roundOffValue(weatherData.main.humidity), '%', 'wi wi-raindrop')}
 
               {/* Wind Speed */}
               {renderDataWithIcon(
                 roundOffValue(convertMPSToKMH(weatherData.wind.speed)),
                 'Km/h',
-                mapWindIcon(
-                  roundOffValue(convertMPSToKMH(weatherData.wind.speed))
-                )
+                mapWindIcon(roundOffValue(convertMPSToKMH(weatherData.wind.speed)))
               )}
             </div>
           </div>

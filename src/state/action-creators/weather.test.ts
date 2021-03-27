@@ -3,11 +3,7 @@ import {
   GET_WEATHER_DATA_FAILURE,
   GET_WEATHER_DATA_SUCCESS,
 } from '../action-types/weather';
-import {
-  getWeatherData,
-  getWeatherDataFailure,
-  getWeatherDataSuccess,
-} from './weather';
+import { getWeatherData, getWeatherDataFailure, getWeatherDataSuccess } from './weather';
 
 describe('weather - action creators', () => {
   test('getWeatherData', () => {
