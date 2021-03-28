@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import React from 'react';
 import { css } from '@emotion/react';
 import Skycons, { SkyconsType } from 'react-skycons';
 
@@ -48,4 +49,4 @@ export enum WeatherAnimationType {
   Fog = SkyconsType.FOG,
 }
 
-export default WeatherAnimation;
+export default React.memo(WeatherAnimation);

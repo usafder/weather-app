@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import React from 'react';
 import { css } from '@emotion/react';
 
 interface IconProps {
@@ -24,4 +25,4 @@ Icon.defaultProps = {
   css: undefined,
 };
 
-export default Icon;
+export default React.memo(Icon);
