@@ -1,8 +1,3 @@
-/** Converts meter per second value into kilometer per hour */
-export function convertMPSToKMH(valueToConvert: number) {
-  return valueToConvert * 3.6;
-}
-
 /** Maps the className based on the temperature. */
 export function mapWeatherBgColor(temperature: number) {
   let className = '';
@@ -33,9 +28,4 @@ export function mapWindIcon(windSpeed: number) {
   }
 
   return className;
-}
-
-/** Returns the rounded off value. */
-export function roundOffValue(valueToRoundOff: number) {
-  return Math.round(valueToRoundOff);
 }
