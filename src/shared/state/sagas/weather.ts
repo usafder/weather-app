@@ -16,14 +16,14 @@ export function* getLocationCoordinates() {
 
 /** Updates the data or displays an error based on the API response. */
 export function* handleWeatherAPIResponse(response: APIResponse<Weather>) {
-  if (response?.success) {
-    yield put(getWeatherDataSuccess(response.data));
-    // TODO: save only the required properties instead of saving all of the properties
-    yield call(cacheManager.saveData, response.data.name, JSON.stringify(response.data));
-    yield call(cacheManager.removeData, response.data.name);
-  } else {
+  if (!response.success) {
     yield put(getWeatherDataFailure());
+    return;
   }
+
+  yield put(getWeatherDataSuccess(response.data));
+  yield call(cacheManager.saveData, response.data.name, JSON.stringify(response.data));
+  yield call(cacheManager.removeData, response.data.name);
 }
 
 /** Contains logic to get the current location's weather data from the API. */
@@ -43,18 +43,19 @@ export function* getCurrentLocationWeatherData() {
 
 /** Contains logic to get the weather data from the API or the cache. */
 export function* handleGettingWeatherData(action: ReduxAction) {
-  if (action.payload) {
-    const { cachedData } = yield call(cacheManager.loadData, action.payload);
-    if (cachedData) {
-      yield put(getWeatherDataSuccess(JSON.parse(cachedData)));
-    } else {
-      const city = action.payload;
-      const response: APIResponse<Weather> = yield call(getWeatherDataUsingCityName, city);
-      yield call(handleWeatherAPIResponse, response);
-    }
-  } else {
+  if (!action.payload) {
     yield call(getCurrentLocationWeatherData);
+    return;
   }
+
+  const { cachedData } = yield call(cacheManager.loadData, action.payload);
+  if (cachedData) {
+    yield put(getWeatherDataSuccess(JSON.parse(cachedData)));
+    return;
+  }
+
+  const response: APIResponse<Weather> = yield call(getWeatherDataUsingCityName, action.payload);
+  yield call(handleWeatherAPIResponse, response);
 }
 
 export default function* weatherWatcherSaga() {
