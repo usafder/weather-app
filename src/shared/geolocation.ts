@@ -1,4 +1,4 @@
-export interface Geolocation {
+interface Geolocation {
   getCurrentLocation: () => Promise<any>;
 }
 
