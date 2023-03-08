@@ -1,9 +1,10 @@
+import { ReduxAction } from '../../interfaces/redux';
+import { Weather } from '../../interfaces/weather';
 import {
   GET_WEATHER_DATA,
   GET_WEATHER_DATA_FAILURE,
   GET_WEATHER_DATA_SUCCESS,
 } from '../action-types/weather';
-import { ReduxAction, Weather } from '../../interfaces';
 
 interface WeatherState {
   data: Weather | null;
