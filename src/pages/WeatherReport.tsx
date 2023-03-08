@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import { convertMPSToKMH, mapWeatherBgColor, mapWindIcon, roundOffValue } from '../shared/utils';
 import { Button, Icon, TextInput, Loader, WeatherAnimation } from '../components';
-import { getWeatherData } from '../state/action-creators/weather';
+import { getWeatherData } from '../shared/state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
 
 const WeatherReport = () => {

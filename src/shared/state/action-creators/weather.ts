@@ -1,4 +1,4 @@
-import { Weather } from '../../shared/interfaces';
+import { Weather } from '../../interfaces';
 import {
   GET_WEATHER_DATA,
   GET_WEATHER_DATA_FAILURE,
