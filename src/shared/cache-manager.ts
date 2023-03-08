@@ -1,10 +1,10 @@
-export interface CacheResponse {
+interface CacheResponse {
   success: boolean;
   error?: any;
   cachedData?: string | null;
 }
 
-export interface CacheManager {
+interface CacheManager {
   saveData: (key: string, value: string) => CacheResponse;
   loadData: (key: string) => CacheResponse;
   removeData: (key: string, delay?: number) => CacheResponse;
