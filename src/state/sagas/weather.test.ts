@@ -25,6 +25,7 @@ describe('weather - saga', () => {
     const response = {
       data: { name: 'testing' },
       status: 200,
+      success: true,
     };
     const iterator = handleWeatherAPIResponse(response as any);
     expect(iterator.next().value).toEqual(put(getWeatherDataSuccess(response.data as any)));
@@ -39,6 +40,7 @@ describe('weather - saga', () => {
     const response = {
       data: { name: 'testing' },
       status: 404,
+      success: false,
     };
     const iterator = handleWeatherAPIResponse(response as any);
     expect(iterator.next().value).toEqual(put(getWeatherDataFailure()));
