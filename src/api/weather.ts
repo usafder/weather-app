@@ -1,9 +1,9 @@
-import { apiClient, apiKey } from './api-client';
+import { apiClient } from './api-client';
 
 /** Will fetch the weather data based on the city name. */
 export const getWeatherDataUsingCityName = async (city: string) => {
   try {
-    const queryParams = `?q=${city}&appId=${apiKey}&units=metric`;
+    const queryParams = `?q=${city}&units=metric`;
     const response = await apiClient.get(queryParams);
     return {
       ...response,
@@ -17,7 +17,7 @@ export const getWeatherDataUsingCityName = async (city: string) => {
 /** Will fetch the weather data based on the latitude and longitude. */
 export const getWeatherDataUsingLatAndLong = async (latitude: number, longitude: number) => {
   try {
-    const queryParams = `?lat=${latitude}&lon=${longitude}&appId=${apiKey}&units=metric`;
+    const queryParams = `?lat=${latitude}&lon=${longitude}&units=metric`;
     const response = await apiClient.get(queryParams);
     return {
       ...response,
