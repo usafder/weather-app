@@ -1,28 +1,36 @@
+interface WeatherCondition {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+interface Temperature {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
+}
+
+interface Wind {
+  speed: number;
+  deg: number;
+}
+
+interface Coordinates {
+  lon: number;
+  lat: number;
+}
+
 export interface Weather {
-  coord: {
-    lon: number;
-    lat: number;
-  };
-  weather: Array<{
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }>;
+  coord: Coordinates;
+  weather: Array<WeatherCondition>;
   base: string;
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-  };
+  main: Temperature;
   visibility: number;
-  wind: {
-    speed: number;
-    deg: number;
-  };
+  wind: Wind;
   clouds: { all: number };
   dt: number;
   sys: {
