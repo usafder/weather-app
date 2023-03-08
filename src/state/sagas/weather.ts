@@ -5,11 +5,11 @@ import { GET_WEATHER_DATA } from '../action-types/weather';
 import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '../../api/weather';
 import { ReduxAction, Weather } from '../../shared/interfaces';
 import cacheManager from '../../shared/cache-manager';
-import locationNavigator from '../../shared/location-navigator';
+import geolocation from '../../shared/geolocation';
 
 /** Gets the user's current location coordinates (latitude & longitude). */
 export function* getLocationCoordinates() {
-  const { latitude, longitude } = yield call(locationNavigator.getCurrentLocation);
+  const { latitude, longitude } = yield call(geolocation.getCurrentLocation);
   return { latitude, longitude };
 }
 

@@ -1,8 +1,8 @@
-export interface LocationNavigator {
+export interface Geolocation {
   getCurrentLocation: () => Promise<any>;
 }
 
-const locationNavigator: LocationNavigator = {
+const geolocation: Geolocation = {
   getCurrentLocation: () => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
@@ -13,4 +13,4 @@ const locationNavigator: LocationNavigator = {
   },
 };
 
-export default locationNavigator;
+export default geolocation;
