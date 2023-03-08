@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import queryString from 'query-string';
 import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import { convertMPSToKMH, roundOffValue } from '../shared/utils/converters';
@@ -20,8 +19,9 @@ const WeatherReport = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const params = queryString.parse(location.search);
-    dispatch(getWeatherData(params.city as string));
+    const params = new URLSearchParams(location.search);
+    const city = params.get('city') as string;
+    dispatch(getWeatherData(city));
   }, [location, dispatch]);
 
   const onTextInputChange = (e: any) => {
