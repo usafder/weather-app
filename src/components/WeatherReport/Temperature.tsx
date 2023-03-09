@@ -12,7 +12,7 @@ const temperatureCss = css({
   borderTopColor: 'white',
   borderTop: '1px solid',
   paddingRight: '20px',
-  fontFamily: 'Fjalla One, sans-serif',
+  fontFamily: "'Fjalla One', sans-serif",
 });
 
 const Temperature = (props: TemperatureProps) => {

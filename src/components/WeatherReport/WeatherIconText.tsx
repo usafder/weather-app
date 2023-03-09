@@ -16,7 +16,7 @@ const containerCss = css({
 
 const valueCss = css({
   fontSize: '36px',
-  fontFamily: 'Fjalla One, sans-serif',
+  fontFamily: "'Fjalla One', sans-serif",
   marginLeft: '10px',
 });
 

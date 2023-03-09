@@ -15,7 +15,7 @@ const containerCss = css({
 const cityNameCss = css({
   margin: 0,
   marginBottom: '10px',
-  fontFamily: 'Share Tech Mono monospace',
+  fontFamily: "'Share Tech Mono', monospace",
   fontSize: '2em',
 });
 
