@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Weather } from '../../shared/interfaces/weather';
-import { convertMPSToKMH, roundOffValue } from '../../shared/utils/converters';
-import { mapWindIcon } from '../../shared/utils/mappers';
 import WeatherAnimation, { WeatherAnimationType } from '../WeatherAnimation';
 import Temperature from '../Temperature';
-import Icon from '../Icon';
+import WindSpeed from './WindSpeed';
+import Humidity from './Humidity';
 
 interface WeatherReportProps {
   weatherData: Weather;
@@ -21,34 +20,6 @@ const cityNameCss = css({
   fontFamily: 'Share Tech Mono monospace',
   fontSize: '2em',
 });
-
-const renderDataWithIcon = (data: number, unit: string, iconName: string) => (
-  <h1
-    css={css`
-      padding: 4px;
-      margin: 0;
-      font-family: 'Fjalla One', sans-serif;
-    `}
-  >
-    <span
-      css={css`
-        padding: 8px;
-        padding-bottom: 0;
-        padding-top: 0;
-      `}
-    >
-      <Icon name={iconName} />
-    </span>
-    {roundOffValue(data)}
-    <span
-      css={css`
-        font-size: 16px;
-      `}
-    >
-      {unit}
-    </span>
-  </h1>
-);
 
 const WeatherReport = (props: WeatherReportProps) => {
   const { weatherData } = props;
@@ -72,22 +43,14 @@ const WeatherReport = (props: WeatherReportProps) => {
           `}
         >
           <Temperature value={weatherData.main.temp} />
-
           <div
             css={css`
               border-top-color: white;
               border-top: 1px solid;
             `}
           >
-            {/* Humidity */}
-            {renderDataWithIcon(roundOffValue(weatherData.main.humidity), '%', 'wi wi-raindrop')}
-
-            {/* Wind Speed */}
-            {renderDataWithIcon(
-              roundOffValue(convertMPSToKMH(weatherData.wind.speed)),
-              'Km/h',
-              mapWindIcon(roundOffValue(convertMPSToKMH(weatherData.wind.speed)))
-            )}
+            <Humidity value={weatherData.main.humidity} />
+            <WindSpeed value={weatherData.wind.speed} />
           </div>
         </div>
       </div>
