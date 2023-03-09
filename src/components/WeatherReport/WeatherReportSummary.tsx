@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { convertMPSToKMH } from '../../shared/utils/converters';
+import { mapWindIcon } from '../../shared/utils/mappers';
+import WeatherIconText from './WeatherIconText';
 import Temperature from '../Temperature';
-import Humidity from './Humidity';
-import WindSpeed from './WindSpeed';
 
 interface WeatherReportSummaryProps {
   temperature: number;
@@ -17,19 +18,22 @@ const mainContainerCss = css({
 });
 
 const windAndHumidityContainerCss = css({
-  borderTopColor: 'white',
-  borderTop: '1px solid',
+  borderTop: '1px solid white',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 });
 
 const WeatherReportSummary = (props: WeatherReportSummaryProps) => {
   const { temperature, humidity, windSpeed } = props;
+  const windSpeedInKMH = convertMPSToKMH(windSpeed);
 
   return (
     <div css={mainContainerCss}>
       <Temperature value={temperature} />
       <div css={windAndHumidityContainerCss}>
-        <Humidity value={humidity} />
-        <WindSpeed value={windSpeed} />
+        <WeatherIconText value={humidity} unit="%" icon="wi wi-raindrop" />
+        <WeatherIconText value={windSpeedInKMH} unit="Km/h" icon={mapWindIcon(windSpeedInKMH)} />
       </div>
     </div>
   );
