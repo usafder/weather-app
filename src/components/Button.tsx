@@ -4,26 +4,25 @@ import { css } from '@emotion/react';
 interface ButtonProps {
   text: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  css?: any;
   className?: string;
   disabled?: boolean;
 }
 
+const buttonCss = css({
+  paddingTop: '8px',
+  paddingBottom: '8px',
+  border: '1px solid',
+  borderColor: 'gray',
+  borderRadius: '4px',
+  boxShadow: '0 2px 4px 0px gray',
+});
+
 const Button = (props: ButtonProps) => {
-  const { className, disabled, css: cssStyle, text, onClick } = props;
+  const { className, disabled, text, onClick } = props;
 
   return (
     <button
-      css={css`
-        padding-top: 8px;
-        padding-bottom: 8px;
-        border: 1px solid;
-        border-color: gray;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px 0px gray;
-        cursor: ${disabled ? 'auto' : 'pointer'};
-        ${cssStyle}
-      `}
+      css={buttonCss}
       type="submit"
       className={className}
       onClick={onClick}
@@ -36,7 +35,6 @@ const Button = (props: ButtonProps) => {
 
 Button.defaultProps = {
   className: '',
-  css: undefined,
   disabled: false,
 };
 
