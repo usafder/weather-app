@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { roundOffValue } from '../shared/utils/converters';
+import { roundOffValue } from '../../shared/utils/converters';
 
 interface TemperatureProps {
   value: number;

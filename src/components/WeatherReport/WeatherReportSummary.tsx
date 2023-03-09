@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { convertMPSToKMH } from '../../shared/utils/converters';
 import { mapWindIcon } from '../../shared/utils/mappers';
 import WeatherIconText from './WeatherIconText';
-import Temperature from '../Temperature';
+import Temperature from './Temperature';
 
 interface WeatherReportSummaryProps {
   temperature: number;
