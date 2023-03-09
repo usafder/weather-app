@@ -5,9 +5,10 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import { convertMPSToKMH, roundOffValue } from '../shared/utils/converters';
 import { mapWeatherBgColor, mapWindIcon } from '../shared/utils/mappers';
-import { Button, Icon, TextInput, Loader, WeatherAnimation } from '../components';
+import { Icon, Loader, WeatherAnimation } from '../components';
 import { getWeatherData } from '../shared/state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
+import SearchBar from '../components/SearchBar';
 
 const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
@@ -31,30 +32,6 @@ const WeatherReport = () => {
   const onButtonClick = () => {
     history.push(`?city=${searchText}`);
   };
-
-  const renderSearchBar = () => (
-    <div
-      css={css`
-        padding-top: 20px;
-        margin-bottom: 5%;
-        @media only screen and (min-width: 600px) {
-          margin-bottom: 2%;
-        }
-      `}
-    >
-      <TextInput placeholder="Enter city name" value={searchText} onChange={onTextInputChange} />
-
-      <Button
-        text="Get Weather Report"
-        css={css`
-          margin-left: 10px;
-          margin-top: 4px;
-        `}
-        disabled={!searchText}
-        onClick={onButtonClick}
-      />
-    </div>
-  );
 
   // TODO: customize error message based on the type of error
   const renderErrorMessage = () => <h2>An Error Occurred. Please try again.</h2>;
@@ -148,7 +125,13 @@ const WeatherReport = () => {
         }
       `}
     >
-      {renderSearchBar()}
+      <SearchBar
+        searchText={searchText}
+        buttonText="Get Weather Report"
+        placeholder="Enter city name"
+        onSearchTextChange={onTextInputChange}
+        onButtonClick={onButtonClick}
+      />
       <Loader isLoading={isLoading} />
       {error && renderErrorMessage()}
 
