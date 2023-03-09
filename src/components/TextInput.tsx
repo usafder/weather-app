@@ -7,21 +7,21 @@ interface TextInputProps {
   disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
-  css?: any;
   className?: string;
 }
 
+const textInputCss = css({
+  paddingTop: '8px',
+  paddingBottom: '8px',
+});
+
 const TextInput = (props: TextInputProps) => {
-  const { className, css: cssStyle, type, placeholder, value, disabled, onChange } = props;
+  const { className, type, placeholder, value, disabled, onChange } = props;
 
   return (
     <input
       className={className}
-      css={css`
-        padding-top: 8px;
-        padding-bottom: 8px;
-        ${cssStyle}
-      `}
+      css={textInputCss}
       type={type}
       placeholder={placeholder}
       value={value}
@@ -35,7 +35,6 @@ TextInput.defaultProps = {
   type: 'text',
   disabled: false,
   className: '',
-  css: undefined,
 };
 
 export default TextInput;
