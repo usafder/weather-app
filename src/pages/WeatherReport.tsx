@@ -8,6 +8,7 @@ import { mapWeatherBgColor, mapWindIcon } from '../shared/utils/mappers';
 import { ErrorMessage, Icon, Loader, SearchBar, WeatherAnimation } from '../components';
 import { getWeatherData } from '../shared/state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
+import Temperature from '../components/Temperature';
 
 const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
@@ -31,21 +32,6 @@ const WeatherReport = () => {
   const onButtonClick = () => {
     history.push(`?city=${searchText}`);
   };
-
-  const renderTemperatureSection = () => (
-    <h1
-      css={css`
-        margin: 0;
-        font-size: 80px;
-        border-top-color: white;
-        border-top: 1px solid;
-        padding-right: 20px,
-        font-family: 'Fjalla One', sans-serif;
-      `}
-    >
-      {`${roundOffValue(weatherData.main.temp)}\u00B0`}
-    </h1>
-  );
 
   const renderDataWithIcon = (data: number, unit: string, iconName: string) => (
     <h1
@@ -162,7 +148,7 @@ const WeatherReport = () => {
               margin-top: 10px;
             `}
           >
-            {renderTemperatureSection()}
+            <Temperature value={weatherData.main.temp} />
 
             <div
               css={css`
