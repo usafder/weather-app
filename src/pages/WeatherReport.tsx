@@ -101,7 +101,7 @@ const WeatherReport = () => {
           padding-top: 0;
         `}
       >
-        <Icon name={iconName} size={30} />
+        <Icon name={iconName} />
       </span>
       {roundOffValue(data)}
       <span

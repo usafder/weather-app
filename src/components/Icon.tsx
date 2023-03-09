@@ -4,25 +4,15 @@ import { css } from '@emotion/react';
 
 interface IconProps {
   name: string;
-  size: number;
-  css?: any;
 }
 
-const Icon = (props: IconProps) => {
-  const { name, css: cssStyle, size } = props;
-  return (
-    <i
-      className={name}
-      css={css`
-        font-size: ${size};
-        ${cssStyle}
-      `}
-    />
-  );
-};
+const iconCss = css({
+  fontSize: 30,
+});
 
-Icon.defaultProps = {
-  css: undefined,
+const Icon = (props: IconProps) => {
+  const { name } = props;
+  return <i className={name} css={iconCss} />;
 };
 
 export default React.memo(Icon);
