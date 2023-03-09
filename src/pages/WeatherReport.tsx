@@ -5,10 +5,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import { convertMPSToKMH, roundOffValue } from '../shared/utils/converters';
 import { mapWeatherBgColor, mapWindIcon } from '../shared/utils/mappers';
-import { Icon, Loader, WeatherAnimation } from '../components';
+import { Icon, Loader, SearchBar, WeatherAnimation } from '../components';
 import { getWeatherData } from '../shared/state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
-import SearchBar from '../components/SearchBar';
 
 const WeatherReport = () => {
   const [searchText, setSearchText] = useState('');
