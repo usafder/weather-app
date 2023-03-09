@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { convertMPSToKMH } from '../../shared/utils/converters';
-import { mapWindIcon } from '../../shared/utils/mappers';
+import { convertMPSToKMH } from '@utils/converters';
+import { mapWindIcon } from '@utils/mappers';
 import WeatherIconText from './WeatherIconText';
 import Temperature from './Temperature';
 

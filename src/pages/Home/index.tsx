@@ -3,12 +3,12 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { mapWeatherBgColor } from '../../shared/utils/mappers';
-import { getWeatherData } from '../../shared/state/action-creators/weather';
-import WeatherReport from '../../components/WeatherReport';
-import SearchBar from '../../components/SearchBar';
-import Loader from '../../components/Loader';
-import ErrorMessage from '../../components/ErrorMessage';
+import WeatherReport from '@components/WeatherReport';
+import SearchBar from '@components/SearchBar';
+import Loader from '@components/Loader';
+import ErrorMessage from '@components/ErrorMessage';
+import { getWeatherData } from '@state/action-creators/weather';
+import { mapWeatherBgColor } from '@utils/mappers';
 import './index.css';
 
 const containerCss = css({

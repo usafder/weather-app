@@ -1,12 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { APIResponse } from '../../../api/api-client';
-import { getWeatherDataFailure, getWeatherDataSuccess } from '../action-creators/weather';
-import { GET_WEATHER_DATA } from '../action-types/weather';
-import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '../../../api/weather';
-import cacheManager from '../../cache-manager';
-import geolocation from '../../geolocation';
-import { Weather } from '../../interfaces/weather';
-import { ReduxAction } from '../../interfaces/redux';
+import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '@api/weather';
+import { APIResponse } from '@api/api-client';
+import { getWeatherDataFailure, getWeatherDataSuccess } from '@state/action-creators/weather';
+import { GET_WEATHER_DATA } from '@state/action-types/weather';
+import cacheManager from '@shared/cache-manager';
+import geolocation from '@shared/geolocation';
+import { Weather } from '@shared/interfaces/weather';
+import { ReduxAction } from '@shared/interfaces/redux';
 
 /** Gets the user's current location coordinates (latitude & longitude). */
 export function* getLocationCoordinates() {

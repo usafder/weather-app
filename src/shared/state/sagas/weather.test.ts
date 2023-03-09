@@ -1,9 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '../../../api/weather';
-import cacheManager from '../../cache-manager';
-import { ReduxAction } from '../../interfaces/redux';
-import { getWeatherDataFailure, getWeatherDataSuccess } from '../action-creators/weather';
-import { GET_WEATHER_DATA } from '../action-types/weather';
+import { getWeatherDataUsingCityName, getWeatherDataUsingLatAndLong } from '@api/weather';
+import cacheManager from '@shared/cache-manager';
+import { ReduxAction } from '@shared/interfaces/redux';
+import { getWeatherDataFailure, getWeatherDataSuccess } from '@state/action-creators/weather';
+import { GET_WEATHER_DATA } from '@state/action-types/weather';
 import weatherWatcherSaga, {
   getLocationCoordinates,
   handleWeatherAPIResponse,

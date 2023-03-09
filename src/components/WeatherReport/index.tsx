@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Weather } from '../../shared/interfaces/weather';
+import { Weather } from '@shared/interfaces/weather';
 import WeatherAnimation, { WeatherAnimationType } from './WeatherAnimation';
 import WeatherReportSummary from './WeatherReportSummary';
 
