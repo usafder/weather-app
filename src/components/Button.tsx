@@ -15,6 +15,10 @@ const buttonCss = css({
   borderColor: 'gray',
   borderRadius: '4px',
   boxShadow: '0 2px 4px 0px gray',
+  cursor: 'pointer',
+  '&:disabled': {
+    cursor: 'not-allowed',
+  },
 });
 
 const Button = (props: ButtonProps) => {
