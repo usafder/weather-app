@@ -2,8 +2,16 @@
 import { css, keyframes } from '@emotion/react';
 
 interface LoaderProps {
-  css?: any;
+  containerClassName?: string;
+  className?: string;
+  isLoading: boolean;
 }
+
+const loaderContainerCss = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
 
 const rotate360 = keyframes`
   from {
@@ -14,28 +22,34 @@ const rotate360 = keyframes`
   }
 `;
 
+const loaderCss = css({
+  animation: `${rotate360} 1s linear infinite`,
+  transform: 'translateZ(0)',
+  border: '8px solid gray',
+  borderLeft: '8px solid skyblue',
+  background: 'transparent',
+  width: '100px',
+  height: '100px',
+  borderRadius: '50%',
+});
+
 const Loader = (props: LoaderProps) => {
-  const { css: cssStyle } = props;
+  const { containerClassName, className, isLoading } = props;
+
+  if (!isLoading) {
+    return null;
+  }
 
   return (
-    <div
-      css={css`
-        animation: ${rotate360} 1s linear infinite;
-        transform: translateZ(0);
-        border: 8px solid gray;
-        border-left: 8px solid skyblue;
-        background: transparent;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        ${cssStyle}
-      `}
-    />
+    <div css={loaderContainerCss} className={containerClassName}>
+      <div css={loaderCss} className={className} />;
+    </div>
   );
 };
 
 Loader.defaultProps = {
-  css: undefined,
+  containerClassName: '',
+  className: '',
 };
 
 export default Loader;

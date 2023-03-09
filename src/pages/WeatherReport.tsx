@@ -56,18 +56,6 @@ const WeatherReport = () => {
     </div>
   );
 
-  const renderLoader = () => (
-    <div
-      css={css`
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      `}
-    >
-      <Loader />
-    </div>
-  );
-
   // TODO: customize error message based on the type of error
   const renderErrorMessage = () => <h2>An Error Occurred. Please try again.</h2>;
 
@@ -161,7 +149,7 @@ const WeatherReport = () => {
       `}
     >
       {renderSearchBar()}
-      {isLoading && renderLoader()}
+      <Loader isLoading={isLoading} />
       {error && renderErrorMessage()}
 
       {weatherData && (
