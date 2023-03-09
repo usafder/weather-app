@@ -10,7 +10,7 @@ import { getWeatherData } from '../shared/state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
 import Temperature from '../components/Temperature';
 
-const WeatherReport = () => {
+const Home = () => {
   const [searchText, setSearchText] = useState('');
   const location = useLocation();
   const history = useHistory();
@@ -173,4 +173,4 @@ const WeatherReport = () => {
   );
 };
 
-export default WeatherReport;
+export default Home;
