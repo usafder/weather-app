@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
-import { convertMPSToKMH, roundOffValue } from '../shared/utils/converters';
-import { mapWeatherBgColor, mapWindIcon } from '../shared/utils/mappers';
-import { ErrorMessage, Icon, Loader, SearchBar, WeatherAnimation } from '../components';
+import { mapWeatherBgColor } from '../shared/utils/mappers';
+import { ErrorMessage, Loader, SearchBar } from '../components';
 import { getWeatherData } from '../shared/state/action-creators/weather';
-import { WeatherAnimationType } from '../components/WeatherAnimation';
-import Temperature from '../components/Temperature';
+import WeatherReport from '../components/WeatherReport';
 
 const Home = () => {
   const [searchText, setSearchText] = useState('');
@@ -32,34 +30,6 @@ const Home = () => {
   const onButtonClick = () => {
     history.push(`?city=${searchText}`);
   };
-
-  const renderDataWithIcon = (data: number, unit: string, iconName: string) => (
-    <h1
-      css={css`
-        padding: 4px;
-        margin: 0;
-        font-family: 'Fjalla One', sans-serif;
-      `}
-    >
-      <span
-        css={css`
-          padding: 8px;
-          padding-bottom: 0;
-          padding-top: 0;
-        `}
-      >
-        <Icon name={iconName} />
-      </span>
-      {roundOffValue(data)}
-      <span
-        css={css`
-          font-size: 16px;
-        `}
-      >
-        {unit}
-      </span>
-    </h1>
-  );
 
   return (
     <div
@@ -117,58 +87,7 @@ const Home = () => {
       <Loader isLoading={isLoading} />
       <ErrorMessage error={error} />
 
-      {weatherData && (
-        <div
-          css={css`
-            color: white;
-          `}
-        >
-          {/* City Name */}
-          <h1
-            css={css`
-              margin: 0;
-              margin-bottom: 10px;
-              font-family: 'Share Tech Mono', monospace;
-              font-size: 2em;
-            `}
-          >
-            {weatherData.name.toUpperCase()}
-          </h1>
-
-          <WeatherAnimation
-            color="white"
-            type={WeatherAnimationType[weatherData.weather[0].main]}
-            size={220}
-          />
-
-          <div
-            css={css`
-              display: flex;
-              justify-content: center;
-              margin-top: 10px;
-            `}
-          >
-            <Temperature value={weatherData.main.temp} />
-
-            <div
-              css={css`
-                border-top-color: white;
-                border-top: 1px solid;
-              `}
-            >
-              {/* Humidity */}
-              {renderDataWithIcon(roundOffValue(weatherData.main.humidity), '%', 'wi wi-raindrop')}
-
-              {/* Wind Speed */}
-              {renderDataWithIcon(
-                roundOffValue(convertMPSToKMH(weatherData.wind.speed)),
-                'Km/h',
-                mapWindIcon(roundOffValue(convertMPSToKMH(weatherData.wind.speed)))
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <WeatherReport weatherData={weatherData} />
     </div>
   );
 };
