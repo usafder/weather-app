@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import { convertMPSToKMH, roundOffValue } from '../shared/utils/converters';
 import { mapWeatherBgColor, mapWindIcon } from '../shared/utils/mappers';
-import { Icon, Loader, SearchBar, WeatherAnimation } from '../components';
+import { ErrorMessage, Icon, Loader, SearchBar, WeatherAnimation } from '../components';
 import { getWeatherData } from '../shared/state/action-creators/weather';
 import { WeatherAnimationType } from '../components/WeatherAnimation';
 
@@ -31,9 +31,6 @@ const WeatherReport = () => {
   const onButtonClick = () => {
     history.push(`?city=${searchText}`);
   };
-
-  // TODO: customize error message based on the type of error
-  const renderErrorMessage = () => <h2>An Error Occurred. Please try again.</h2>;
 
   const renderTemperatureSection = () => (
     <h1
@@ -132,7 +129,7 @@ const WeatherReport = () => {
         onButtonClick={onButtonClick}
       />
       <Loader isLoading={isLoading} />
-      {error && renderErrorMessage()}
+      <ErrorMessage error={error} />
 
       {weatherData && (
         <div
