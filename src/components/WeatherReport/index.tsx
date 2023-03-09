@@ -2,9 +2,7 @@
 import { css } from '@emotion/react';
 import { Weather } from '../../shared/interfaces/weather';
 import WeatherAnimation, { WeatherAnimationType } from '../WeatherAnimation';
-import Temperature from '../Temperature';
-import WindSpeed from './WindSpeed';
-import Humidity from './Humidity';
+import WeatherReportSummary from './WeatherReportSummary';
 
 interface WeatherReportProps {
   weatherData: Weather;
@@ -35,24 +33,11 @@ const WeatherReport = (props: WeatherReportProps) => {
           size={220}
         />
 
-        <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-          `}
-        >
-          <Temperature value={weatherData.main.temp} />
-          <div
-            css={css`
-              border-top-color: white;
-              border-top: 1px solid;
-            `}
-          >
-            <Humidity value={weatherData.main.humidity} />
-            <WindSpeed value={weatherData.wind.speed} />
-          </div>
-        </div>
+        <WeatherReportSummary
+          temperature={weatherData.main.temp}
+          humidity={weatherData.main.humidity}
+          windSpeed={weatherData.wind.speed}
+        />
       </div>
     )
   );
