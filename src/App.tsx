@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import Router from './router';
-import 'weathericons/css/weather-icons.min.css';
 
 const appCss = css({
   textAlign: 'center',
